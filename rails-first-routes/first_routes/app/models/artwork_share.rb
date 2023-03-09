@@ -13,10 +13,12 @@ class ArtworkShare < ApplicationRecord
     validates :artwork_id, uniqueness: { scope: :viewer_id }
 
     belongs_to :viewer,
-        foreign_key: :viewer_id,
+        # foreign_key: :viewer_id,
+        inverse_of: :artwork_shares,
         class_name: :User
 
     belongs_to :artwork,
-        foreign_key: :artwork_id,
-        class_name: :Artwork
+        # foreign_key: :artwork_id,
+        inverse_of: :artwork_shares
+        # class_name: :Artwork
 end
