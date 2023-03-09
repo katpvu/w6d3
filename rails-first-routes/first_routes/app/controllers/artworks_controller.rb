@@ -2,9 +2,11 @@ require 'byebug'
 
 class ArtworksController < ApplicationController
     def index
-        if params[:artist_id]
-            artworks = Artwork.where(artworks: {artist_id: params[:artist_id]})
-            render json: artworks
+        if params[:user_id]
+            #How do we know what to return? Artworks by user_id or the shared artworks with user_id?
+            # render json: Artwork.artworks_for_user_id(params[:user_id])[0]
+            #shares = User.joins(:shared_artworks).where(artwork_shares: {viewer_id: params[:user_id]})
+            render json: Artwork.artworks_for_user_id(params[:user_id])
         else
             artworks = Artwork.all 
             render json: artworks
