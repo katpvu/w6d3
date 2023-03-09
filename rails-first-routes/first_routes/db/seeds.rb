@@ -8,9 +8,29 @@
 
 
 #Populating Users table!
+    
+    ArtworkShare.destroy_all
+    Artwork.destroy_all
+    User.destroy_all
 
-users = User.create([ { username: "kat123" }, { username: "alex456" }, { username: "davinki" }, { username: "aquaphor" }])
+    puts 'Resetting id sequences...'
+    %w(users artworks artwork_shares).each do |table_name|
+        ApplicationRecord.connection.reset_pk_sequence!(table_name)
+    end
 
-mona_lisa = Artwork.create( {title: "Mona Lisa", image_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/1200px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg", artist_id: 3 })
+    kat = User.create!( username: "kat123" )
 
-ArtworkShares.create( [])
+    alex =  User.create!( username: "alex456" ) 
+
+    da_vinki = User.create!( username: "davinki" ) 
+
+    aquaphor = User.create!( username: "aquaphor" )
+
+    mona_lisa = Artwork.create!( {title: "Mona Lisa", image_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/1200px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg", artist_id: 3 })
+
+    sharing = ArtworkShare.create!( 
+        artwork_id: mona_lisa.id,
+        viewer_id: kat.id
+        )
+
+    puts "Seeds Complete!"

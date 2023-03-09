@@ -4,15 +4,19 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  # resources :users, except: [:new, :edit]
-
   #VERB '/path', to: 'controller#action'
 
-  get '/users', to: 'users#index'
-  post '/users', to: 'users#create'
-  get '/users/:id', to: 'users#show', as: 'user'
-  patch '/users/:id', to: 'users#update'
-  put '/users/:id', to: 'users#update'
-  delete '/users/:id', to: 'users#destroy'
-
+  # get '/users', to: 'users#index'
+  # post '/users', to: 'users#create'
+  # get '/users/:id', to: 'users#show', as: 'user'
+  # patch '/users/:id', to: 'users#update'
+  # put '/users/:id', to: 'users#update'
+  # delete '/users/:id', to: 'users#destroy'
+  
+  
+  resources :users, except: [:new, :edit]
+  resources :artworks, except: [:new, :edit]
+  resources :artwork_shares, only: [:create, :destroy]
+  
+  
 end
