@@ -86,3 +86,254 @@ Processing by UsersController#create as */*
 Completed 200 OK in 2ms (Views: 1.5ms | Allocations: 192)
 
 
+  [1m[35m (422.1ms)[0m  [1m[35mCREATE DATABASE "first_routes_development" ENCODING = 'unicode'[0m
+  [1m[35m (328.2ms)[0m  [1m[35mCREATE DATABASE "first_routes_test" ENCODING = 'unicode'[0m
+  [1m[35m (17.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (16.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7974280239715595190)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20230309001346)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (18.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying NOT NULL, "email" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230309001346"]]
+  [1m[36mTRANSACTION (3.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (5.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-03-09 00:19:27.408804"], ["updated_at", "2023-03-09 00:19:27.408804"]]
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(7974280239715595190)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (3.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "alex"], ["email", "flotsam@jetsam.com"], ["created_at", "2023-03-09 00:25:46.300469"], ["updated_at", "2023-03-09 00:25:46.300469"]]
+  [1m[36mTRANSACTION (3.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "kat"], ["email", "flim@flam.com"], ["created_at", "2023-03-09 00:26:17.488489"], ["updated_at", "2023-03-09 00:26:17.488489"]]
+  [1m[36mTRANSACTION (11.2ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/users" for ::1 at 2023-03-08 16:28:46 -0800
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as */*
+  Rendering text template
+  Rendered text template (Duration: 0.1ms | Allocations: 13)
+Completed 200 OK in 12ms (Views: 11.3ms | ActiveRecord: 0.0ms | Allocations: 1386)
+
+
+Started GET "/users" for ::1 at 2023-03-08 16:30:05 -0800
+Processing by UsersController#index as */*
+  [1m[36mUser Load (7.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4:in `index'
+Completed 200 OK in 74ms (Views: 34.9ms | ActiveRecord: 33.4ms | Allocations: 6113)
+
+
+Started POST "/users" for ::1 at 2023-03-08 16:35:05 -0800
+Processing by UsersController#create as */*
+Started POST "/users?name=Jane&email=janedoe@deer.com" for ::1 at 2023-03-08 16:37:41 -0800
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Jane", "email"=>"janedoe@deer.com"}
+Completed 400 Bad Request in 2ms (ActiveRecord: 0.0ms | Allocations: 1358)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:10:in `create'
+
+Started POST "/users/?name=Jane&email=janedoe@deer.com" for ::1 at 2023-03-08 16:38:38 -0800
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Jane", "email"=>"janedoe@deer.com"}
+Completed 400 Bad Request in 4ms (ActiveRecord: 0.0ms | Allocations: 600)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:10:in `create'
+
+Started GET "/users/?name=Jane&email=janedoe@deer.com/__better_errors" for ::1 at 2023-03-08 16:41:26 -0800
+Processing by UsersController#index as HTML
+  Parameters: {"name"=>"Jane", "email"=>"janedoe@deer.com/__better_errors"}
+  [1m[36mUser Load (4.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+Completed 200 OK in 98ms (Views: 66.9ms | ActiveRecord: 21.0ms | Allocations: 5588)
+
+
+Started POST "/users?user[:name]=Jane&user[:email]=janedoe@deer.com" for ::1 at 2023-03-08 16:43:14 -0800
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{":name"=>"Jane", ":email"=>"janedoe@deer.com"}}
+[31mUnpermitted parameters: ::name, ::email. Context: { controller: UsersController, action: create, request: #<ActionDispatch::Request:0x00007f39d0c1e6f0>, params: {"user"=>{":name"=>"Jane", ":email"=>"janedoe@deer.com"}, "controller"=>"users", "action"=>"create"} }[0m
+Completed 422 Unprocessable Entity in 163ms (ActiveRecord: 0.0ms | Allocations: 3922)
+
+
+
+ActiveRecord::RecordInvalid - Validation failed: Name can't be blank, Email can't be blank:
+  app/controllers/users_controller.rb:11:in `create'
+
+Started POST "/users?user[name]=Jane&user[email]=janedoe@deer.com" for ::1 at 2023-03-08 16:43:38 -0800
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"Jane", "email"=>"janedoe@deer.com"}}
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mUser Create (6.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Jane"], ["email", "janedoe@deer.com"], ["created_at", "2023-03-09 00:43:38.997031"], ["updated_at", "2023-03-09 00:43:38.997031"]]
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mTRANSACTION (6.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:11:in `create'
+Completed 200 OK in 61ms (Views: 1.9ms | ActiveRecord: 13.8ms | Allocations: 3418)
+
+
+Started POST "/users?user[age]=35&user[address]=12%20Drury%20Lane" for ::1 at 2023-03-08 16:47:39 -0800
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"age"=>"35", "address"=>"12 Drury Lane"}}
+[31mUnpermitted parameters: :age, :address. Context: { controller: UsersController, action: create, request: #<ActionDispatch::Request:0x00007f39d8b0c1b0>, params: {"user"=>{"age"=>"35", "address"=>"12 Drury Lane"}, "controller"=>"users", "action"=>"create"} }[0m
+Completed 422 Unprocessable Entity in 50ms (Views: 0.5ms | ActiveRecord: 14.4ms | Allocations: 4099)
+
+
+Started POST "/users?user[name]=Jane&user[email]=janedoe@deer.com" for ::1 at 2023-03-08 16:49:56 -0800
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"Jane", "email"=>"janedoe@deer.com"}}
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mUser Exists? (2.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "janedoe@deer.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:11:in `create'
+Completed 422 Unprocessable Entity in 209ms (Views: 0.5ms | ActiveRecord: 9.3ms | Allocations: 8183)
+
+
+Started GET "/users" for ::1 at 2023-03-08 16:55:55 -0800
+
+SyntaxError - syntax error, unexpected end-of-input, expecting `end':
+  app/controllers/users_controller.rb:42:in `'
+
+Started GET "/users" for ::1 at 2023-03-08 16:56:07 -0800
+Processing by UsersController#index as */*
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+Completed 200 OK in 118ms (Views: 96.5ms | ActiveRecord: 32.9ms | Allocations: 6060)
+
+
+Started DELETE "/users/3" for ::1 at 2023-03-08 17:00:39 -0800
+Processing by UsersController#destroy as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:40:in `destroy'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:41:in `destroy'
+  [1m[36mUser Destroy (3.4ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/users_controller.rb:41:in `destroy'
+  [1m[36mTRANSACTION (12.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:41:in `destroy'
+No template found for UsersController#destroy, rendering head :no_content
+Completed 204 No Content in 79ms (ActiveRecord: 31.7ms | Allocations: 6175)
+
+
+Started POST "/users?user[name]=Jane&user[email]=JaneDoe@deer.com" for ::1 at 2023-03-08 17:03:20 -0800
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"Jane", "email"=>"JaneDoe@deer.com"}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "JaneDoe@deer.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mUser Create (1.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Jane"], ["email", "JaneDoe@deer.com"], ["created_at", "2023-03-09 01:03:21.066818"], ["updated_at", "2023-03-09 01:03:21.066818"]]
+  ↳ app/controllers/users_controller.rb:11:in `create'
+  [1m[36mTRANSACTION (8.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:11:in `create'
+Completed 200 OK in 55ms (Views: 4.9ms | ActiveRecord: 18.0ms | Allocations: 5691)
+
+
+Started GET "/users/3" for ::1 at 2023-03-08 17:04:00 -0800
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:20:in `show'
+Completed 404 Not Found in 13ms (ActiveRecord: 0.8ms | Allocations: 1886)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find User with 'id'=3:
+  app/controllers/users_controller.rb:20:in `show'
+
+Started GET "/users/4" for ::1 at 2023-03-08 17:04:35 -0800
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:20:in `show'
+Completed 200 OK in 9ms (Views: 1.9ms | ActiveRecord: 1.4ms | Allocations: 650)
+
+
+Started PATCH "/users/4?user[name]=Jenny" for ::1 at 2023-03-08 17:05:52 -0800
+Processing by UsersController#update as */*
+  Parameters: {"user"=>{"name"=>"Jenny"}, "id"=>"4"}
+  [1m[36mUser Load (6.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (4) LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:30:in `update'
+Completed 500 Internal Server Error in 21ms (ActiveRecord: 6.8ms | Allocations: 2051)
+
+
+
+ActiveRecord::StatementInvalid - PG::DatatypeMismatch: ERROR:  argument of WHERE must be type boolean, not type integer
+LINE 1: SELECT "users".* FROM "users" WHERE (4) LIMIT $1
+                                             ^:
+  app/controllers/users_controller.rb:30:in `update'
+
+Started PATCH "/users/4" for ::1 at 2023-03-08 17:06:37 -0800
+Processing by UsersController#update as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (3.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (4) LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:30:in `update'
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 3.4ms | Allocations: 1930)
+
+
+
+ActiveRecord::StatementInvalid - PG::DatatypeMismatch: ERROR:  argument of WHERE must be type boolean, not type integer
+LINE 1: SELECT "users".* FROM "users" WHERE (4) LIMIT $1
+                                             ^:
+  app/controllers/users_controller.rb:30:in `update'
+
+Started PATCH "/users?user[name]=Jenny" for ::1 at 2023-03-08 17:07:10 -0800
+  
+ActionController::RoutingError (No route matches [PATCH] "/users"):
+  
+Started PATCH "/users/4?user[name]=Jenny" for ::1 at 2023-03-08 17:10:37 -0800
+Processing by UsersController#update as */*
+  Parameters: {"user"=>{"name"=>"Jenny"}, "id"=>"4"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:30:in `update'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:31:in `update'
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "JaneDoe@deer.com"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:31:in `update'
+  [1m[36mUser Update (2.3ms)[0m  [1m[33mUPDATE "users" SET "name" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["name", "Jenny"], ["updated_at", "2023-03-09 01:10:38.083473"], ["id", 4]]
+  ↳ app/controllers/users_controller.rb:31:in `update'
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:31:in `update'
+Redirected to http://localhost:3000/users/4
+Completed 302 Found in 110ms (ActiveRecord: 23.1ms | Allocations: 7339)
+
+
+Started GET "/users/4" for ::1 at 2023-03-08 17:10:38 -0800
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:20:in `show'
+Completed 200 OK in 7ms (Views: 0.7ms | ActiveRecord: 0.5ms | Allocations: 1573)
+
+
+Started DELETE "/users/4" for ::1 at 2023-03-08 17:11:19 -0800
+Processing by UsersController#destroy as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:40:in `destroy'
+  [1m[36mTRANSACTION (3.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:41:in `destroy'
+  [1m[36mUser Destroy (1.1ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 4]]
+  ↳ app/controllers/users_controller.rb:41:in `destroy'
+  [1m[36mTRANSACTION (13.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:41:in `destroy'
+Redirected to http://localhost:3000/users
+Completed 302 Found in 43ms (ActiveRecord: 19.2ms | Allocations: 2070)
+
+
+Started GET "/users" for ::1 at 2023-03-08 17:11:19 -0800
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+Completed 200 OK in 12ms (Views: 10.6ms | ActiveRecord: 0.7ms | Allocations: 893)
+
+
