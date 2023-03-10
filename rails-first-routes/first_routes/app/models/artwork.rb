@@ -28,6 +28,13 @@ class Artwork < ApplicationRecord
         through: :artwork_shares,
         source: :viewer
 
+    has_many :comments,
+        foreign_key: :artwork_id,
+        class_name: :Comment,
+        dependent: :destroy
+
+    has_many :likes, as: :likeable
+
     def self.artworks_for_user_id(input_id)
         shared = Artwork.joins(:artwork_shares).where('viewer_id = ?', input_id)
         artworks = Artwork.where('artist_id = ?', input_id)
